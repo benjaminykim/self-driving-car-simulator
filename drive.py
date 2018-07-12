@@ -16,6 +16,7 @@ from keras.models import load_model
 import h5py
 from keras import __version__ as keras_version
 import cv2
+from data_process import process_image
 
 sio = socketio.Server()
 app = Flask(__name__)
@@ -66,9 +67,9 @@ def telemetry(sid, data):
         image_array = cv2.resize(image_array, (220, 66), cv2.INTER_AREA)
         image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2YUV)
 
-
-        steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
-
+        prediction = model.predict(image_array[None, :, :, :], batch_size=1)
+        steering_angle = float(prediction[0][0])
+        #throttle = controller.update(float(prediction[0][1]))
         throttle = controller.update(float(speed))
 
         print(steering_angle, throttle)

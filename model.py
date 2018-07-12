@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 import matplotlib.image as matplot
 from sklearn.utils import shuffle
+from data_process import process
 
 # shape of input data
 SHAPE = (66, 220, 3)
@@ -16,11 +17,11 @@ SHAPE = (66, 220, 3)
 
 def model_architecture():
     """ model_architecture: creates model architecture
-        1 : Lambda layer for preprocessing
-        5 : Convolutional 2D Layers
-        1 : Dropout Layer (0.2 dropout)
-        1 : Flatten Layer
-        4 : Dense Layers
+            1 : Lambda layer for preprocessing
+            5 : Convolutional 2D Layers
+            1 : Dropout Layer (0.5 dropout)
+            1 : Flatten Layer
+            4 : Dense Layers
 
         model architecture loosely based off of Nvidia's research paper:
             https://arxiv.org/pdf/1604.07316.pdf
@@ -70,7 +71,7 @@ def model_architecture():
     model.add(Dense(10, activation='elu'))      # 10 neurons
 
     # OUTPUT LAYER
-    model.add(Dense(1))                         # output steering angle
+    model.add(Dense(2))                         # output steering angle, throttle
 
     # Inspect Model
     model.summary()
@@ -88,13 +89,13 @@ def data_preprocessing(
     """ data_preprocessing: preprocess data for training
 
         parameters:
-        load: true to load previous data (bool)
-        save_image: true to save input images (200 default) (bool)
-        save_data: true to save current data (bool)
-        clr: true to use all Center, Left, and Right images (bool)
-        flip: true to include flipped images with steering angles (bool)
-        shuffle_data: true to randomly shuffle all data (bool)
-        augment: methodology of image manipulation for extra data (string)
+            load: true to load previous data (bool)
+            save_image: true to save input images (200 default) (bool)
+            save_data: true to save current data (bool)
+            clr: true to use all Center, Left, and Right images (bool)
+            flip: true to include flipped images with steering angles (bool)
+            shuffle_data: true to randomly shuffle all data (bool)
+            augment: methodology of image manipulation for extra data (string)
 
         return: tuple of input_data and output_data (np array, np array)
     """
@@ -191,12 +192,11 @@ def save_image_data(data, count=1000):
         save_image_data: save image data to system
 
         parameters:
-        data: images to save to system (np array)
-        count: number of images to save (int)
+            data: images to save to system (np array)
+            count: number of images to save (int)
 
         return: none
     """
-
     for i in range(count):
         cv2.imwrite('image_preprocessed/' + str(i) + '.jpg', data[i])
 
@@ -205,9 +205,10 @@ def train(data, model, validation_percentage=0.5):
     """
         train: train the model
 
-        data: input and output data (np array, np array)
-        model: model to be fitted (keras model)
-        validation_percentage: percent of data to be used for validation (float)
+        parameters:
+            data: input and output data (np array, np array)
+            model: model to be fitted (keras model)
+            validation_percentage: percent of data to be used for validation (float)
 
         return: none
     """
@@ -247,14 +248,16 @@ if __name__ == "__main__":
     """
 
     # preprocess data
-    data = data_preprocessing(
-            load=True,
-            save_image=False,
-            save_data=True,
-            clr=True,
-            flip=True,
-            shuffle_data=True,
-            augment='translate')
+    # data = data_preprocessing(
+    #         load=True,
+    #         save_image=False,
+    #         save_data=True,
+    #         clr=True,
+    #         flip=True,
+    #         shuffle_data=True,
+    #         augment='translate')
+
+    data = process()
 
     # instantiate model architecture
     model = model_architecture()
@@ -267,85 +270,3 @@ if __name__ == "__main__":
 
     # save model for implementation/prediction
     model.save("model.h5")
-
-
-""" MODEL INFORMATION FROM DIFFERENT TRIALS
-a
-    clr                 True
-    flip                True
-    validation_split    0.5
-    numpy-shuffle       False
-
-                        1                   :       got past 1st curve. crashed into left side of bridge
-                            epoch           :       10
-                            val loss        :       0.0347
-                        2                   :       crashed into bridge
-                            epoch           :       4
-                            val loss        :       0.02621
-
-b
-    clr                 True
-    flip                True
-    validation_split    0.3
-    numpy-shuffle       False
-
-                        1                   :       crashed into bridge
-                            epoch           :       9
-                            val loss        :       0.0318
-                        2*                  :       crashed into water after bridge
-                            epoch           :       6
-                            val loss        :       0.0324
-
-c
-    clr                 True
-    flip                True
-    validation_split    0.01
-    numpy-shuffle       False
-
-                        0                   :       ALL INCONCLUSIVE
-
-d
-    clr                 True
-    flip                True
-    validation_split    0.25
-    numpy-shuffle       False
-
-                        0                   :       ALL INCONCLUSIVE
-
-e
-    clr                 True
-    flip                True
-    validation_split    0.35
-    numpy-shuffle       False
-                        0                   :       uneven driving
-                        1                   :       crashed into dirt past bridge
-                            epoch           :       4
-                            val loss        :       0.0296
-                        2                   :       crashed into dirt past bridge
-                            epoch           :       9
-                            val loss        :       0.0292
-                        3*                  :       crashed into water past bridge
-                            epoch           :       10
-                            val loss        :       0.0320
-
-f
-    clr                 True
-    flip                True
-    validation_split    0.33
-    numpy-shuffle       True
-                        0                   :       uneven driving
-                        1                   :       finished two laps
-                            epoch           :       7
-                            val loss        :       0.0171
-
-g
-    clr                 True
-    flip                True
-    validation_split    0.30
-    numpy-shuffle       True
-                        0                   :       new data
-                        1                   :
-                            epoch           :
-                            val loss        :
-
-"""
