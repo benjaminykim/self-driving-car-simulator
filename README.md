@@ -6,4 +6,4 @@ Here is a gif of the autonomous capabilities of the current working model:
 
 ![alt text](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif)
 
-![alt text](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif)
+![alt text](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/2.gif)
