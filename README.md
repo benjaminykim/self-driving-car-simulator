@@ -10,3 +10,13 @@ Here are short gifs that demonstrate the model's ability to maneuver the car aro
 ![alt text](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif)
 
 ![alt text](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/2.gif)
+
+### Shortcomings
+
+1. Since the kind of maps within the simulator are limited, the model is not sufficiently robust as training data was very limited.
+2. The model was not trained with velocity in mind. Therefore, the autonomous driving velocity was fixed to 10 mph. The disadvantages of this are straightfoward.
+
+## Methodology
+
+
+
