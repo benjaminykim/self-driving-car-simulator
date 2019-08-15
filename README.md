@@ -1,7 +1,7 @@
 # Convolutional Neural Network - Self Driving Car
 
 ## Introduction
-With Udacity's car simulator found [here]**(https://github.com/udacity/self-driving-car-sim), machine learning enthusiasts can easily use the embedded image feed from the virtual car to create a self-driving car. My implementation of this idea incorporates research publications from [Nvidia](https://devblogs.nvidia.com/deep-learning-self-driving-cars/) to construct the neural network, Keras as the machine learning framework (with Tensorflow backend), and Python in order to drive a car around a map.
+With [Udacity's car simulator](https://github.com/udacity/self-driving-car-sim/), machine learning enthusiasts can easily use the embedded image feed from the virtual car to create a self-driving car. My implementation of this idea incorporates [research publications from Nvidia](https://devblogs.nvidia.com/deep-learning-self-driving-cars/) to construct the neural network, Keras as the machine learning framework (with Tensorflow backend), and Python in order to drive a car around a map.
 
 ## Results
 
