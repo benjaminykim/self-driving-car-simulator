@@ -9,7 +9,8 @@ I trained a network with 280,000 parameters. Specifics on implementation can be 
 
 Here are short gifs that demonstrate the model's ability to maneuver the car around a race track. While there are no automated benchmarks for performance, I ran the network overnight and the car had never crashed.
 
-![self driving car gif 1](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif) ![self driving car gif 2](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/2.gif)
+![self driving car gif 1](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif) | ![self driving car gif 2](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/2.gif)
+:-------------------------:|:-------------------------:
 
 ## Shortcomings
 1. Since the kind and number of maps within the simulator are limited, the model is not sufficiently robust as training data may not encapsulate edge cases.
@@ -52,7 +53,7 @@ Some notes for data pre_processing:
 I ultimately used `python3 data_process.py -s -f` to create my dataset.
 ### `model.py`
 This script trains the convolutional neural network model. It is designed by Nvidia and the actual research paper is found [here](https://arxiv.org/pdf/1604.07316.pdf).
-###### Model Architecture:
+#### Model Architecture:
 
 	1 : Lambda layer for preprocessing
 	5 : Convolutional 2D Layers
