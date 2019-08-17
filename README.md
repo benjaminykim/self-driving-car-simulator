@@ -9,15 +9,13 @@ I trained a network with 280,000 parameters. Specifics on implementation can be 
 
 Here are short gifs that demonstrate the model's ability to maneuver the car around a race track. While there are no automated benchmarks for performance, I ran the network overnight and the car had never crashed.
 
-![self driving car gif 1](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif)
-
-![self driving car gif 2](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/2.gif)
+![self driving car gif 1](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/1.gif) ![self driving car gif 2](https://github.com/benjaminykim/self-driving-car-simulator/blob/master/media%20assets/2.gif)
 
 ## Shortcomings
 1. Since the kind and number of maps within the simulator are limited, the model is not sufficiently robust as training data may not encapsulate edge cases.
 2. The car's velocity was not considered in the model construction. Therefore, the I fixed the autonomous vehicles velocity to 10 mph. The disadvantages are straightforward.
 
-## Usage
+## Onboarding
 1. Install Udacity's self driving car simulator [here](https://github.com/udacity/self-driving-car-sim/).
 2. Install Tensorflow and Keras
 3. Data Generation
@@ -34,7 +32,7 @@ Here are short gifs that demonstrate the model's ability to maneuver the car aro
 	3. Activate tensorflow/keras
 	4. Use the `drive.py` script to drive the car in the simulator
 
-## Documentation
+## Usage
 ### `data_process.py`
 This script is used to convert our image data to numpy arrays so that the Keras model can use the data properly. It also handles all data processing and generation.
 
