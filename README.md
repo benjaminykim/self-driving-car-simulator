@@ -33,7 +33,8 @@ Here are short gifs that demonstrate the model's ability to maneuver the car aro
 	2. Select "Autonomous mode"
 	3. Activate tensorflow/keras
 	4. Use the drive.py script to drive the car in the simulator
-			> python3 drive.py /models/best_model.h5
+
+		> python3 drive.py /models/best_model.h5
 
 ## Documentation
 ### data_process.py
